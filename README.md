@@ -2,6 +2,9 @@
   <source media="(prefers-color-scheme: dark)" srcset="custom_components/yeelight_night_mode/brand/dark_icon.png">
   <img src="custom_components/yeelight_night_mode/brand/icon.png" width="80" height="80" alt="Yeelight Night Mode">
 </picture>
+# Yeelight Night Mode
+
+
 
 # Yeelight Night Mode
 
