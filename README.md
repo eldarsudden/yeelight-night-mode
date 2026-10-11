@@ -1,9 +1,10 @@
-# Yeelight Night Mode
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="custom_components/yeelight_night_mode/brand/dark_icon.png">
   <img src="custom_components/yeelight_night_mode/brand/icon.png" width="80" height="80" alt="Yeelight Night Mode">
 </picture>
+# Yeelight Night Mode
+
+
 
 A custom Home Assistant integration for controlling the moonlight/nightlight mode of Yeelight lights. It creates an entity for each supported light and a group switch for each area.
 
@@ -32,7 +33,7 @@ For group control, assign the source `light.*` entity or its device to a Home As
 ### Through HACS
 
 1. Open **Custom repositories** in HACS.
-2. Add `https://github.com/eldarsudden/yeelight_night_mode` with the **Integration** category.
+2. Add `https://github.com/eldarsudden/yeelight-night-mode` with the **Integration** category.
 3. Find **Yeelight Night Mode** and install it.
 4. Restart Home Assistant.
 5. Go to **Settings → Devices & services → Add integration** and select **Yeelight Night Mode**.
