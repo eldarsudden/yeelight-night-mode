@@ -60,6 +60,9 @@
   },
   "entity": {
     "switch": {
+      "area_night_mode": {
+        "name": "Yeelight Nightlight Mode · {area}"
+      },
       "night_mode": {
         "name": "Nightlight Mode"
       }

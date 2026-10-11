@@ -1,6 +1,9 @@
 {
   "entity": {
     "switch": {
+      "area_night_mode": {
+        "default": "mdi:weather-night"
+      },
       "night_mode": {
         "default": "mdi:weather-night"
       }

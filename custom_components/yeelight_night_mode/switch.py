@@ -1,6 +1,7 @@
 """Switch platform for Yeelight Night Mode.
 
-Used when the `entity_type` option is set to "switch" (the default).
+Always provides area switches; individual switches are added when the
+`entity_type` option is set to "switch" (the default).
 Discovery and state logic are shared with the `light` platform -- see
 `discovery.py` and `entity.py`.
 """
@@ -13,6 +14,8 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
+from .area import async_setup_area_switches
+from .const import CONF_ENTITY_TYPE, ENTITY_TYPE_SWITCH
 from .discovery import async_discover_targets
 from .entity import YeelightNightModeEntityMixin
 
@@ -24,8 +27,7 @@ async def async_setup_entry(
     entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Discover Yeelight bulbs and add a night-mode switch for each one
-    that supports the mode."""
+    """Add area switches and, when selected, individual night-mode switches."""
 
     try:
         import yeelight  # noqa: F401
@@ -38,18 +40,23 @@ async def async_setup_entry(
         return
 
     targets = await async_discover_targets(hass, entry)
-    async_add_entities(
-        YeelightNightModeSwitch(
-            target.host,
-            target.name,
-            target.entity_id_object,
-            target.display_name,
-            target.light_entity_id,
-            target.night_sensor_entity_id,
-            target.device_id,
-        )
-        for target in targets
+    entity_type = entry.options.get(
+        CONF_ENTITY_TYPE, entry.data.get(CONF_ENTITY_TYPE, ENTITY_TYPE_SWITCH)
     )
+    if entity_type == ENTITY_TYPE_SWITCH:
+        async_add_entities(
+            YeelightNightModeSwitch(
+                target.host,
+                target.name,
+                target.entity_id_object,
+                target.display_name,
+                target.light_entity_id,
+                target.night_sensor_entity_id,
+                target.device_id,
+            )
+            for target in targets
+        )
+    async_setup_area_switches(hass, entry, targets, async_add_entities)
 
 
 class YeelightNightModeSwitch(YeelightNightModeEntityMixin, SwitchEntity):
