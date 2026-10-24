@@ -100,11 +100,10 @@ class YeelightNightModeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     @staticmethod
     @callback
     def async_get_options_flow(config_entry: config_entries.ConfigEntry) -> config_entries.OptionsFlow:
-        return YeelightNightModeOptionsFlow(config_entry)
+        return YeelightNightModeOptionsFlow()
 
 class YeelightNightModeOptionsFlow(config_entries.OptionsFlow):
-    def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
-        self.config_entry = config_entry
+    """Handle options using the config entry supplied by Home Assistant."""
 
     async def async_step_init(self, user_input: dict | None = None) -> FlowResult:
         current_type = self.config_entry.options.get(
